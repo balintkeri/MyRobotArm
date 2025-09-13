@@ -44,13 +44,15 @@ class App:
         self.sendCommandButton.pack(pady=10)
 
         self.exitButton = tk.Button(root, text="Exit", command=self.cleanup)
+        self.exitButton.pack(pady=10)
+        
 
         self.updateControlVisibility()
 
     def cleanup(self):
         self.robot_arm.cleanup()
         self.root.destroy()
-        
+
 
     def updateControlVisibility(self):
         if self.robot_arm.isControlType("AngleControl"):
