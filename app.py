@@ -35,7 +35,6 @@ class App:
             
             node_id = i.id
             node_entry = tk.Label(self.anglegridFrame, width=10, text=str(node_id))
-            node_entry.insert(0, str(node_id))
             node_entry.grid(row=node_id, column=0, padx=5, pady=5)
             angle_entry = tk.Entry(self.anglegridFrame, width=10)
             angle_entry.grid(row=node_id, column=1, padx=5, pady=5)
