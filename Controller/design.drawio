@@ -34,6 +34,9 @@
                 <mxCell id="12" value="GUI" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
                     <mxGeometry x="400" y="190" width="120" height="40" as="geometry"/>
                 </mxCell>
+                <mxCell id="16" value="Config" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+                    <mxGeometry x="680" y="360" width="120" height="40" as="geometry"/>
+                </mxCell>
             </root>
         </mxGraphModel>
     </diagram>
