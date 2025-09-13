@@ -45,7 +45,7 @@ class App:
 
         self.exitButton = tk.Button(root, text="Exit", command=self.cleanup)
         self.exitButton.pack(pady=10)
-        
+
 
         self.updateControlVisibility()
 
@@ -83,7 +83,7 @@ class App:
                     angle_str = entry.get()
                     if angle_str:
                         angle = float(angle_str)
-                        node_id = self.robot_arm.controller.nodes[i].id
+                        node_id = i+1
                         self.robot_arm.command(angle=angle, node=node_id)
                         print(f"Sent Angle Control Command: Node {node_id}, Angle {angle}")
             else:
