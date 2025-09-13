@@ -29,3 +29,6 @@ class RobotArm:
             self.controller = InverseKinematics()
         else:
             raise ValueError("Unknown controller type")
+        
+    def cleanup(self):
+        self.controller.cleanup()
