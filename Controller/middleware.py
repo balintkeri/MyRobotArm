@@ -9,9 +9,12 @@ class Position:
     y: float
     z: float
 
+@dataclass
 class Angle:
     node: int
     angle: float
+
+
 
 class Middleware(ABC):
     def __init__(self):
