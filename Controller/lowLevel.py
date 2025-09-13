@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-
+GPIO.setmode(GPIO.BOARD)
 
 class Node:
     def __init__(self, id: int):
