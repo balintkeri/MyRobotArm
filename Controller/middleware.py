@@ -23,10 +23,15 @@ class Middleware(ABC):
     def move_to(self, position: Position):
         pass
 
-    def getNodes(self, id: int):
+    def getNode(self, id: int):
         if id < 0 or id >= len(self.nodes):
             raise IndexError("Node ID out of range")
         return self.nodes[id]
+    
+    def cleanup(self):
+        for node in self.nodes:
+            node._cleanup()
+        
 
 class InverseKinematics(Middleware):
     def move_to(self, position: Position):
@@ -34,4 +39,4 @@ class InverseKinematics(Middleware):
 
 class AngleControl(Middleware):
     def move_to(self, position: Angle):
-        self.getNodes(position.node).set_angle(position.angle)
+        self.getNode(position.node).set_angle(position.angle)
