@@ -14,7 +14,7 @@ class RobotArm:
         elif self.isControlType("AngleControl"):
             if angle is None or node is None:
                 raise ValueError("Angle and Node ID must be provided for AngleControl")
-            self.controller.move_to(Angle(node=node, angle=angle))
+            self.controller.move_to(Angle(node, angle))
         else:
             raise ValueError("Unknown controller type")
 
