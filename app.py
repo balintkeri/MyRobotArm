@@ -79,11 +79,10 @@ class App:
     def sendCommand(self):
         try:
             if self.robot_arm.isControlType("AngleControl"):
-                for i, entry in enumerate(self.angleEntries):
+                for node_id, entry in enumerate(self.angleEntries):
                     angle_str = entry.get()
                     if angle_str:
                         angle = float(angle_str)
-                        node_id = i+1
                         self.robot_arm.command(angle=angle, node=node_id)
                         print(f"Sent Angle Control Command: Node {node_id}, Angle {angle}")
             else:
