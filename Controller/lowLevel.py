@@ -6,8 +6,8 @@ GPIO.setmode(GPIO.BOARD)
 class Node:
     def __init__(self, id: int, autoStopActuation: bool = True, init_angle: float = 0):
         self.id = id
-        self._setup()
         self.angle = init_angle
+        self._setup()
         self.autoStopActuation = autoStopActuation  
 
     def _setup(self):
