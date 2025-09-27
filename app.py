@@ -42,8 +42,6 @@ class App:
             angle_entry.grid(row=node_id, column=1, padx=5, pady=5)
             self.angleEntries.append(angle_entry)
 
-        self.sendCommandButton = tk.Button(self.controlFrame, text="Send Command", command=self.sendCommand)
-        self.sendCommandButton.pack(pady=10)
 
         self.exitButton = tk.Button(root, text="Exit", command=self.cleanup)
         self.exitButton.pack(pady=10)
@@ -78,7 +76,7 @@ class App:
         self.updateControlVisibility()
         print("Switched to Inverse Kinematics")
 
-    def sendCommand(self):
+    def sendCommand(self, _):
         commands = []
         try:
             if self.robot_arm.isControlType("AngleControl"):
