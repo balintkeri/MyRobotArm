@@ -4,34 +4,25 @@ import time
 GPIO.setmode(GPIO.BOARD)
 
 class Node:
-    def __init__(self, id: int):
+    def __init__(self, id: int, autoStopActuation: bool = True, init_angle: float = 0):
         self.id = id
         self._setup()
-        self.angle = None
+        self.angle = init_angle
+        self.autoStopActuation = autoStopActuation  
 
     def _setup(self):
         GPIO.setup(self.id, GPIO.OUT)
         self.pwm = GPIO.PWM(self.id, 50)
         self.pwm.start(0)
 
+        self.set_angle(self.angle)
+
     def _cleanup(self):
         self.pwm.stop()
         GPIO.cleanup(self.id)
 
-
-    def initAngle(self, angle: float):
-        if self.angle is None:
-            self.set_angle(angle)
-            self.angle = angle
-            self.stopActuation()
-            return True
-        else:
-            return False
-
     def move(self, angle:float):
-        if self.initAngle(angle):
-            return
-        
+    
         step = 1 if angle > self.angle else -1
         for a in range(int(self.angle), int(angle), step):
             self.set_angle(a)
@@ -47,8 +38,9 @@ class Node:
         self.pwm.ChangeDutyCycle(duty)
 
     def stopActuation(self):
-        time.sleep(0.3)
-        self.pwm.ChangeDutyCycle(0)
+        if self.autoStopActuation:
+            time.sleep(0.3)
+            self.pwm.ChangeDutyCycle(0)
 
 
 class CurrentSensor:
