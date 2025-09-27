@@ -18,29 +18,38 @@ class Node:
         self.pwm.stop()
         GPIO.cleanup(self.id)
 
-    def set_angle(self, angle: float):
 
-        if angle == self.angle:
-            return
-
-        def step(tempAngle):
-            duty = tempAngle / 18 + 2
-            self.pwm.ChangeDutyCycle(duty)
-            time.sleep(0.02 )
-        
-        if angle > self.angle:
-            for tempAngle in range(int(self.angle), int(angle)+1):
-                step(tempAngle)
+    def initAngle(self, angle: float):
+        if self.angle is None:
+            self.set_angle(angle)
+            self.angle = angle
+            self.stopActuation()
+            return True
         else:
-            for tempAngle in range(int(self.angle), int(angle)-1, -1):
-                step(tempAngle)
-            
-        #duty = angle / 18 + 2
-        #self.pwm.ChangeDutyCycle(duty)
-        time.sleep(1)
+            return False
+
+    def move(self, angle:float):
+        if self.initAngle(angle):
+            return
+        
+        step = 1 if angle > self.angle else -1
+        for a in range(int(self.angle), int(angle), step):
+            self.set_angle(a)
+            time.sleep(0.02)
+        self.set_angle(angle)
+        self.angle = angle
+        self.stopActuation()
+
+
+
+    def set_angle(self, angle: float):
+        duty = angle / 18 + 2
+        self.pwm.ChangeDutyCycle(duty)
+
+    def stopActuation(self):
+        time.sleep(0.3)
         self.pwm.ChangeDutyCycle(0)
 
-        self.angle = angle
 
 class CurrentSensor:
     def __init__(self, id: int):
