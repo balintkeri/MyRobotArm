@@ -38,7 +38,7 @@ class App:
             node_id = i.id
             node_entry = tk.Label(self.anglegridFrame, width=10, text=str(node_id))
             node_entry.grid(row=node_id, column=0, padx=5, pady=5)
-            angle_entry = tk.Entry(self.anglegridFrame, width=10)
+            angle_entry = tk.Scale(self.anglegridFrame, from_=0, to=180, orient=tk.HORIZONTAL, command=self.sendCommand)
             angle_entry.grid(row=node_id, column=1, padx=5, pady=5)
             self.angleEntries.append(angle_entry)
 
