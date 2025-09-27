@@ -42,4 +42,4 @@ class InverseKinematics(Middleware):
 
 class AngleControl(Middleware):
     def move_to(self, position: Angle):
-        self.getNode(position.node).set_angle(position.angle)
+        self.getNode(position.node).move(position.angle)
