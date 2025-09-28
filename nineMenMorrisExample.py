@@ -67,10 +67,20 @@ class ExampleApp:
         frame = tk.Frame(self.root)
         frame.pack(padx=20, pady=20)
 
+        # exit button
+
+        exit_button = tk.Button(self.root, text="Exit", command=self.exit)
+        exit_button.pack(pady=10)
+
         for key, (row, col) in positions.items():
             btn = tk.Button(frame, text=key, width=4, height=2, command=lambda k=key: self.buttonPressed(k))
             btn.grid(row=row, column=col, padx=5, pady=5)
             self.buttons[key] = btn
+
+    def exit(self):
+        self.robot_arm.cleanup()
+        self.root.destroy()
+        
 
     def buttonPressed(self, key):
         self.goBase()
@@ -89,7 +99,7 @@ class ExampleApp:
     def goBase(self):
         commands = []
         for index, angle in enumerate([0, 90, 90]):
-            commands.append( threading.Thread(target=self.robot_arm.command, kwargs={"node": i, "angle": 90}) )
+            commands.append( threading.Thread(target=self.robot_arm.command, kwargs={"node": index, "angle": angle}) )
         
         for command in commands:
             command.start()
