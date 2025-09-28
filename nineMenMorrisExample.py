@@ -2,7 +2,8 @@
 
 import tkinter as tk
 import threading
-#from Controller import RobotArm, AngleControl, InverseKinematics
+
+from Controller import RobotArm, AngleControl, InverseKinematics
 
 
 class ExampleApp:
@@ -49,7 +50,7 @@ class ExampleApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Nine Men's Morris Example")
-
+        self.robot_arm = RobotArm()
         self.buttons = {}
 
         # Coordinates for button placement (row, column) for a 7x7 grid
