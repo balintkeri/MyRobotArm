@@ -8,6 +8,7 @@ from Controller import RobotArm, AngleControl, InverseKinematics
 
 class ExampleApp:
     TABLE_POSITION = {
+        'safestate': (0, 90, 90),
         '000': (71, 111, 116),
         '001': (68, 93, 108),
         '002': (71, 73, 116),
@@ -44,6 +45,7 @@ class ExampleApp:
         '220': (55,100,66),
         '221': (53,91,63),
         '222': (54,79,63),
+
     }
 
 
@@ -70,7 +72,9 @@ class ExampleApp:
         # exit button
 
         exit_button = tk.Button(self.root, text="Exit", command=self.exit)
+        safe_button = tk.Button(self.root, text="Safe", command=self.goSafe)
         exit_button.pack(pady=10)
+        safe_button.pack(pady=10)
 
         for key, (row, col) in positions.items():
             btn = tk.Button(frame, text=key, width=4, height=2, command=lambda k=key: self.buttonPressed(k))
