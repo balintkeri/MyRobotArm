@@ -43,6 +43,24 @@ class Node:
             self.pwm.ChangeDutyCycle(0)
 
 
+class Magnet:
+    def __init__(self, id: int):
+        self.id = id
+        self._setup()
+
+    def _setup(self):
+        GPIO.setup(self.id, GPIO.OUT)
+        self.off()
+
+    def on(self):
+        GPIO.output(self.id, GPIO.HIGH)
+
+    def off(self):
+        GPIO.output(self.id, GPIO.LOW)
+
+    def cleanup(self):
+        GPIO.cleanup(self.id)
+
 class CurrentSensor:
     def __init__(self, id: int):
         self.id = id
