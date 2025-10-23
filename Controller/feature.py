@@ -5,6 +5,13 @@ from .middleware import *
 class RobotArm:
     def __init__(self):
         self.controller = AngleControl()
+        self.magnet = Magnet(magnet_pin)
+
+    def magnetOn(self):
+        self.magnet.on()
+
+    def magnetOff(self):
+        self.magnet.off()
 
     def command(self, angle:float = None, node:int = None, position: Position = None):
         if self.isControlType("InverseKinematics"):
@@ -32,3 +39,4 @@ class RobotArm:
         
     def cleanup(self):
         self.controller.cleanup()
+        self.magnet.cleanup()
