@@ -48,6 +48,11 @@ class App:
         self.exitButton = tk.Button(root, text="Exit", command=self.cleanup)
         self.exitButton.pack(pady=10)
 
+        self.magnetOnButton = tk.Button(root, text="Magnet On", command=self.robot_arm.magnetOn)
+        self.magnetOnButton.pack(pady=5)
+        self.magnetOffButton = tk.Button(root, text="Magnet Off", command=self.robot_arm.magnetOff)
+        self.magnetOffButton.pack(pady=5)
+
 
         self.updateControlVisibility()
 
