@@ -85,6 +85,15 @@ class ExampleApp:
         self.robot_arm.cleanup()
         self.root.destroy()
         
+    def goSafe(self):
+        commands = []
+        for i, angle in enumerate(self.TABLE_POSITION['safestate']):
+            commands.append( threading.Thread(target=self.robot_arm.command, kwargs={"node": i, "angle": angle}) )
+            
+        for command in commands:
+            command.start()
+        for command in commands:
+            command.join()
 
     def buttonPressed(self, key):
         self.goBase()
