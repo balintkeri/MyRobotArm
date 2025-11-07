@@ -7,7 +7,7 @@ from Controller import RobotArm
 class RobotArmAdapter:
     def __init__(self):
         self.robotArm = RobotArm()
-        self.TABLE_POSITION = {
+        self.positions = {
         'safestate': [0, 90, 90],
         '000': [71, 111, 116],
         '001': [68, 93, 108],
@@ -51,9 +51,9 @@ class RobotArmAdapter:
         }
         
     def move(self, start, end):
-        self.robotArm.command(angles=self.TABLE_POSITION[start])
+        self.robotArm.command(angles=self.positions[start])
         self.robotArm.MagnetOn()
-        self.robotArm.command(angles=self.TABLE_POSITION['safestate'])
-        self.robotArm.command(angles=self.TABLE_POSITION[end])
+        self.robotArm.command(angles=self.positions['safestate'])
+        self.robotArm.command(angles=self.positions[end])
         self.robotArm.MagnetOff()
-        self.robotArm.command(angles=self.TABLE_POSITION['safestate'])
+        self.robotArm.command(angles=self.positions['safestate'])
