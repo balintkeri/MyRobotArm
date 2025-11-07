@@ -1,7 +1,7 @@
 
 import tkinter as tk
 
-from Controller import RobotArm, AngleControl, InverseKinematics
+from Controller import RobotArm
 
 import threading
 
@@ -87,24 +87,13 @@ class App:
         commands = []
         try:
             if self.robot_arm.isControlType("AngleControl"):
-                for node_id, entry in enumerate(self.angleEntries):
-                    angle_str = entry.get()
-                    if angle_str:
-                        angle = float(angle_str)
-                        commands.append(threading.Thread(target=self.robot_arm.command, args=(angle, node_id)))
-                        #self.robot_arm.command(angle=angle, node=node_id)
-                        print(f"Sent Angle Control Command: Node {node_id}, Angle {angle}")
+                self.robot_arm.command(angles=[float(entry.get()) for entry in self.angleEntries])
             else:
                 position_str = self.positionEntry.get()
                 x, y, z = map(float, position_str.split(','))
-                commands.append(threading.Thread(target=self.robot_arm.command, args=(None, None, self.robot_arm.controller.Position(x, y, z))))
-                #self.robot_arm.command(position=self.robot_arm.controller.Position(x, y, z))
+                self.robot_arm.command(position=self.robot_arm.controller.Position(x, y, z))
                 print(f"Sent Inverse Kinematics Command: Position ({x}, {y}, {z})")
 
-            for command in commands:
-                command.start()
-            for command in commands:
-                command.join() # Wait for all threads to complete
 
         except Exception as e:
             print(f"Error: {e}")
