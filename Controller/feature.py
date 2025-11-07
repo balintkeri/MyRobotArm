@@ -13,15 +13,15 @@ class RobotArm:
     def magnetOff(self):
         self.magnet.off()
 
-    def command(self, angle:float = None, node:int = None, position: Position = None):
+    def command(self, angles:list[Angle] = None, node:int = None, position: Position = None):
         if self.isControlType("InverseKinematics"):
             if position is None:
                 raise ValueError("Position must be provided for InverseKinematics")
             self.controller.move_to(position)
         elif self.isControlType("AngleControl"):
-            if angle is None or node is None:
-                raise ValueError("Angle and Node ID must be provided for AngleControl")
-            self.controller.move_to(Angle(node, angle))
+            if angles is None:
+                raise ValueError("Angles must be provided for AngleControl")
+            self.controller.move_to(angles)
         else:
             raise ValueError("Unknown controller type")
 
