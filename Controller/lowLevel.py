@@ -61,17 +61,3 @@ class Magnet:
     def cleanup(self):
         GPIO.cleanup(self.id)
 
-class CurrentSensor:
-    def __init__(self, id: int):
-        self.id = id
-        self._setup()
-
-    def _setup(self):
-        GPIO.setup(self.id, GPIO.IN)
-
-    def read_value(self) -> int:
-        return GPIO.input(self.id)
-
-    def _cleanup(self):
-        GPIO.cleanup(self.id)
-
