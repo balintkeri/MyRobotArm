@@ -13,7 +13,7 @@ class RobotArm:
     def magnetOff(self):
         self.magnet.off()
 
-    def command(self, angles:list[Angle] = None, node:int = None, position: Position = None):
+    def command(self, angles:list = None, node:int = None, position: Position = None):
         if self.isControlType("InverseKinematics"):
             if position is None:
                 raise ValueError("Position must be provided for InverseKinematics")
