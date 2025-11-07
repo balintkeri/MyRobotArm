@@ -34,6 +34,7 @@ class Node:
 
 
     def set_angle(self, angle: float):
+        print("Setting angle of Node", self.id, "to", angle)
         duty = angle / 18 + 2
         self.pwm.ChangeDutyCycle(duty)
 
