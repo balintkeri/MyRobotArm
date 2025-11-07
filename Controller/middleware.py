@@ -38,15 +38,11 @@ class Middleware(ABC):
 
 class InverseKinematics(Middleware):
     def move_to(self, position: Position):
-        denavit_hartenberg_params = [
-            # (x_move, x_rotate, z_move, z_rotate)
-            (0, -90, 70, "q1"), # Joint 1
-            (0, 180, 40, "q2"), # Joint 2
-            (180, 0, 25, "q3"), # Joint 3
-        ]
+        raise NotImplementedError("Inverse Kinematics not implemented yet")
 
         
 
 class AngleControl(Middleware):
-    def move_to(self, position: Angle):
-        self.getNode(position.node).move(position.angle)
+    def move_to(self, angles: list[Angle]):
+        for angle in angles:
+            self.getNode(angle.node).move(angle.angle)
