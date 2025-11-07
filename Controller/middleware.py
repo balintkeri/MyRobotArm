@@ -2,6 +2,7 @@ from .lowLevel import *
 from .config import *
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+import threading
 
 @dataclass
 class Position:
@@ -43,6 +44,15 @@ class InverseKinematics(Middleware):
         
 
 class AngleControl(Middleware):
-    def move_to(self, angles: list[Angle]):
-        for angle in angles:
-            self.getNode(angle.node).move(angle.angle)
+    def move_to(self, angles: list):
+        commands = []
+        for i, angle in enumerate(angles):
+            if isinstance(angle, Angle):
+                commands.append(threading.Thread(target=self.getNode(angle.node).move, args=(angle.angle,)))
+            else:
+                commands.append(threading.Thread(target=self.getNode(i).move, args=(angle,)))
+
+        for command in commands:
+                command.start()
+        for command in commands:
+            command.join() # Wait for all threads to complete
