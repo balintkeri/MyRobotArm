@@ -84,7 +84,6 @@ class App:
         print("Switched to Inverse Kinematics")
 
     def sendCommand(self, _):
-        commands = []
         try:
             if self.robot_arm.isControlType("AngleControl"):
                 self.robot_arm.command(angles=[float(entry.get()) for entry in self.angleEntries])
