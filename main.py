@@ -45,7 +45,10 @@ class RobotArmAdapter:
         '220': [55,100,66],
         '221': [53,91,63],
         '222': [54,79,63],
-    }
+        
+        'takeoff': [57,120,76],
+        'dropoff': [58,60,83]
+        }
         
     def move(self, start, end):
         self.robotArm.command(angles=self.TABLE_POSITION[start])
