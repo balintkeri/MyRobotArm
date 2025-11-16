@@ -1,7 +1,7 @@
 
 
 
-from Controller import RobotArm
+from .Controller import RobotArm
 
 
 class RobotArmAdapter:
